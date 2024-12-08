@@ -10,9 +10,10 @@ public class GlobalCorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Adjust this to restrict paths if needed
-                .allowedOrigins("http://localhost:3000", "https://charity-loop.vercel.app")
+                .allowedOrigins("http://localhost:3000", "https://charity-loop2.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
 }
+
