@@ -1,23 +1,18 @@
 package com.Donation.Project.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class GlobalCorsConfig {
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000"); // Allow specific origin
-        config.addAllowedHeader("*"); // Allow all headers
-        config.addAllowedMethod("*"); // Allow all methods (GET, POST, etc.)
-        config.setAllowCredentials(true); // Allow credentials (cookies, etc.)
+public class GlobalCorsConfig implements WebMvcConfigurer {
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // Apply to all endpoints
-        return new CorsFilter(source);
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // Adjust this to restrict paths if needed
+                .allowedOrigins("http://localhost:3000", "https://charity-loop.vercel.app")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }
